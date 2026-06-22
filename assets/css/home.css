@@ -326,13 +326,17 @@
 }
 
 @media (max-width: 768px) {
+  .hero-section {
+    min-height: 400px;
+    height: 55vh; /* Reduced height to force a landscape aspect ratio and let users see page content below */
+  }
   .hero-slide {
     justify-content: center;
   }
   .hero-slide-content {
     align-items: center;
     text-align: center;
-    padding: 110px 20px 60px;
+    padding: 85px 20px 35px; /* Compact padding to fit within the reduced height */
   }
   .hero-left-column {
     align-items: center;
@@ -346,23 +350,24 @@
     background: none !important;
   }
   .hero-brand-tag {
-    font-size: 1rem;
-    margin-bottom: 16px;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
   }
   .hero-tagline-title {
-    font-size: 2.2rem;
-    margin-bottom: 15px;
+    font-size: 1.8rem; /* Reduced font size for better fit */
+    margin-bottom: 12px;
     font-weight: 800;
+    line-height: 1.25;
   }
   .hero-subheading {
-    font-size: 1.05rem;
-    margin-bottom: 20px;
+    font-size: 1rem;
+    margin-bottom: 15px;
   }
   .hero-actions-row {
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
     width: 100%;
-    max-width: 280px;
+    max-width: 260px;
     justify-content: center;
   }
   .hero-actions-row .hero-cta-btn {
@@ -373,7 +378,36 @@
     display: none; /* Hide arrows on touch mobile screens to prevent clutter */
   }
   .hero-pagination {
-    bottom: 25px;
+    bottom: 15px; /* Adjusted pagination dot positioning */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    min-height: 350px;
+    height: 50vh; /* Shorter landscape-oriented format on very small screens */
+  }
+  .hero-slide-content {
+    padding: 75px 16px 20px;
+  }
+  .hero-brand-tag {
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+  .hero-tagline-title {
+    font-size: 1.55rem;
+    margin-bottom: 8px;
+  }
+  .hero-subheading {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+  .hero-actions-row {
+    max-width: 220px;
+    gap: 6px;
+  }
+  .hero-pagination {
+    bottom: 10px;
   }
 }
 
