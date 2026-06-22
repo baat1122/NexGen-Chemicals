@@ -4,6 +4,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeEngine();
+  initLanguageSwitcher();
   initWhatsAppWidget();
   initGlobalNavigation();
   initSmartHeader();
@@ -177,3 +178,24 @@ function initGlobalNavigation() {
 
 
 
+
+/**
+ * Language Switcher Preservation & Click Tracking
+ */
+function initLanguageSwitcher() {
+  const switchLink = document.getElementById('lang-switch-link');
+  if (!switchLink) return;
+
+  // Append query string if any
+  const currentSearch = window.location.search;
+  if (currentSearch) {
+    const baseHref = switchLink.getAttribute('href');
+    switchLink.setAttribute('href', baseHref + currentSearch);
+  }
+
+  // Save selection on click
+  switchLink.addEventListener('click', () => {
+    const targetLang = switchLink.dataset.lang;
+    localStorage.setItem('preferred-language', targetLang);
+  });
+}

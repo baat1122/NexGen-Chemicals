@@ -3,7 +3,7 @@
    ========================================================================== */
 
 /* Google Fonts Import */
-@import url('https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&family=Inter:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Urdu:wght@400..700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&family=Inter:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* Color Variables Configuration */
 :root {
@@ -1133,3 +1133,118 @@ button {
   }
 }
 
+
+/* Language Switcher Styles */
+.lang-switch-link {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  margin-right: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1002;
+}
+
+.lang-switch-link:hover {
+  background-color: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.site-header:not(.header-scrolled) .lang-switch-link {
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.4);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.site-header:not(.header-scrolled) .lang-switch-link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #FFFFFF;
+}
+
+/* Urdu Language Configuration */
+html[lang="ur"] {
+  --font-body: 'Noto Naskh Urdu', 'Rethink Sans', sans-serif;
+  --font-heading: 'Noto Naskh Urdu', 'Libre Caslon Text', serif;
+}
+
+html[lang="ur"] .lang-switch-link {
+  font-family: 'Rethink Sans', sans-serif;
+  margin-right: 0;
+  margin-left: 12px;
+}
+
+/* RTL Layout Adjustments */
+html[lang="ur"] [dir="rtl"] {
+  text-align: right;
+}
+
+/* Swap side paddings/margins in header for RTL */
+html[lang="ur"] .hamburger {
+  margin-left: 0;
+  margin-right: 15px;
+}
+
+/* Realign mobile nav drawer to slide from left in RTL */
+html[lang="ur"] .main-nav {
+  left: auto;
+  right: -100%;
+}
+
+html[lang="ur"] .main-nav.mobile-active {
+  left: auto;
+  right: 0;
+}
+
+html[lang="ur"] .nav-item.dropdown-trigger .dropdown-menu {
+  left: auto;
+  right: 50%;
+  transform: translateX(50%) translateY(10px) scaleY(0.95);
+}
+
+html[lang="ur"] .nav-item.dropdown-trigger:hover .dropdown-menu {
+  transform: translateX(50%) translateY(0) scaleY(1);
+}
+
+html[lang="ur"] .nav-link svg {
+  margin-left: 0;
+  margin-right: 6px;
+}
+
+html[lang="ur"] .theme-toggle-btn {
+  right: auto;
+  left: 30px;
+}
+
+html[lang="ur"] .whatsapp-widget-container {
+  right: auto;
+  left: 30px;
+}
+
+html[lang="ur"] .whatsapp-popup-bubble {
+  right: auto;
+  left: 0;
+}
+
+html[lang="ur"] .whatsapp-popup-close-btn {
+  right: auto;
+  left: 12px;
+}
+
+html[lang="ur"] .nav-item {
+  border-right: none;
+  border-left: 1px solid rgba(17, 35, 90, 0.1);
+}
+
+html[lang="ur"] .nav-item:last-child {
+  border-left: none;
+}

@@ -2,6 +2,7 @@
    NexGen Chemicals - Products Catalog & Details Engine
    ========================================================================== */
 const catalogProducts = window.productsData;
+const isUrdu = document.documentElement.lang === 'ur';
 
 document.addEventListener('DOMContentLoaded', () => {
   // Check if we are on the Catalog page or the Details page
@@ -72,10 +73,10 @@ function initCatalogPage() {
   function renderProducts(category, query) {
     grid.innerHTML = '';
     const filtered = catalogProducts.filter(prod => {
-      const matchesCategory = (category === 'All' || prod.category === category);
+      const matchesCategory = (category === 'All' || isUrdu ? (prod.category_ur || prod.category) : prod.category === category);
       const matchesQuery = !query || 
-        prod.name.toLowerCase().includes(query.toLowerCase()) ||
-        prod.tagline.toLowerCase().includes(query.toLowerCase()) ||
+        isUrdu ? (prod.name_ur || prod.name) : prod.name.toLowerCase().includes(query.toLowerCase()) ||
+        isUrdu ? (prod.tagline_ur || prod.tagline) : prod.tagline.toLowerCase().includes(query.toLowerCase()) ||
         prod.composition.toLowerCase().includes(query.toLowerCase()) ||
         prod.target.toLowerCase().includes(query.toLowerCase());
       
@@ -83,7 +84,7 @@ function initCatalogPage() {
     });
 
     if (filtered.length === 0) {
-      grid.innerHTML = `<div class="no-products-message">Nahi mila! Aapki search query ya select kiye gaye filter ke mutabiq koi product nahi mili.</div>`;
+      grid.innerHTML = `<div class="no-products-message">${isUrdu ? "مطلوبہ پروڈکٹ نہیں ملی! آپ کی تلاش یا منتخب کردہ کیٹیگری کے مطابق کوئی پروڈکٹ دستیاب نہیں ہے۔" : "No products found! No products matched your search query or selected category."}</div>`;
       return;
     }
 
@@ -148,18 +149,18 @@ function initDetailPage() {
   }
 
   // Populate data
-  document.getElementById('detail-category').textContent = prod.category;
-  document.getElementById('detail-title').textContent = prod.name;
-  document.getElementById('detail-description').textContent = prod.description;
-  document.getElementById('detail-composition').textContent = prod.composition;
-  document.getElementById('detail-target').textContent = prod.target;
+  document.getElementById('detail-category').textContent = isUrdu ? (prod.category_ur || prod.category) : prod.category;
+  document.getElementById('detail-title').textContent = isUrdu ? (prod.name_ur || prod.name) : prod.name;
+  document.getElementById('detail-description').textContent = isUrdu ? (prod.description_ur || prod.description) : prod.description;
+  document.getElementById('detail-composition').textContent = isUrdu ? (prod.composition_ur || prod.composition) : prod.composition;
+  document.getElementById('detail-target').textContent = isUrdu ? (prod.target_ur || prod.target) : prod.target;
   document.getElementById('detail-packshot').src = prod.packshot;
   document.getElementById('detail-packshot').alt = `${prod.name} Packaging`;
 
   // Populate WhatsApp Order Now Button link dynamically
   const orderNowBtn = document.getElementById('detail-whatsapp-order-btn');
   if (orderNowBtn) {
-    const message = `Assalam-o-Alaikum! Mujhe NexGen Chemicals ka product "${prod.name}" (${prod.category}) order karna hai. Baraye meherbani is ki mazeed maloomat aur keemat bata dein.`;
+    const message = isUrdu ? `السلام علیکم! مجھے نیکس جین کیمیکلز کا پروڈکٹ "${prod.name}" (${prod.category_ur || prod.category}) آرڈر کرنا ہے۔ برائے مہربانی اس کی مزید معلومات اور قیمت بتا دیں۔` : `Hello! I would like to order "${prod.name}" (${prod.category}) from NexGen Chemicals. Please provide details and pricing.`;
     orderNowBtn.href = `https://wa.me/923008990026?text=${encodeURIComponent(message)}`;
   }
 
@@ -178,7 +179,7 @@ function initDetailPage() {
         const div = document.createElement('div');
         div.className = 'pricing-row-item';
         div.innerHTML = `
-          <span class="pack-size"><strong>${sz.size}</strong></span>
+          <span class="pack-size"><strong>${isUrdu && sz.size_ur ? sz.size_ur : sz.size}</strong></span>
           <span class="pack-price">Rs. ${sz.price.toLocaleString('en-US')}</span>
         `;
         pricingContainer.appendChild(div);
@@ -187,7 +188,7 @@ function initDetailPage() {
       const div = document.createElement('div');
       div.className = 'pricing-row-item';
       div.innerHTML = `
-        <span class="pack-size"><strong>Standard Pack</strong></span>
+        <span class="pack-size"><strong>${isUrdu ? "سٹینڈرڈ پیک" : "Standard Pack"}</strong></span>
         <span class="pack-price">Rs. ${prod.price.toLocaleString('en-US')}</span>
       `;
       pricingContainer.appendChild(div);
@@ -201,9 +202,9 @@ function initDetailPage() {
     prod.dosage.forEach(row => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td><strong>${row.crop}</strong></td>
-        <td>${row.rate}</td>
-        <td>${row.water}</td>
+        <td><strong>${isUrdu ? (row.crop_ur || row.crop) : row.crop}</strong></td>
+        <td>${isUrdu ? (row.rate_ur || row.rate) : row.rate}</td>
+        <td>${isUrdu ? (row.water_ur || row.water) : row.water}</td>
       `;
       tableBody.appendChild(tr);
     });
@@ -213,7 +214,8 @@ function initDetailPage() {
   const safetyList = document.getElementById('safety-steps-list');
   if (safetyList) {
     safetyList.innerHTML = '';
-    prod.safety.forEach(step => {
+    const steps = isUrdu ? (prod.safety_ur || prod.safety) : prod.safety;
+    steps.forEach(step => {
       const li = document.createElement('li');
       li.textContent = step;
       safetyList.appendChild(li);
