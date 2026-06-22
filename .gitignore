@@ -1,0 +1,19 @@
+# Backup files
+*.bak
+*.slider_bak
+
+# Temporary and test files
+no_args.txt
+run_promo.txt
+help.txt
+*.webm
+
+# Screenshot correction directory
+Correction/
+
+# Node modules
+node_modules/
+
+# OS metadata
+.DS_Store
+Thumbs.db

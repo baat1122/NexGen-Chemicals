@@ -1,0 +1,14 @@
+{
+  "name": "nexgen-chemicals",
+  "version": "1.0.0",
+  "description": "High-performance, SEO-optimized web application for NexGen Chemicals",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  }
+}
