@@ -909,56 +909,33 @@
     grid-template-columns: repeat(2, 1fr) !important;
     width: 100% !important;
     max-width: 100% !important;
-    padding: 0 5%;
+    padding: 0 20px;
+    gap: 20px !important;
   }
   .crop-card {
-    height: 400px;
-    transition: box-shadow 0.5s var(--ease-framer);
+    height: 380px;
+    opacity: 1 !important; /* Force visibility to prevent cards from being hidden on tablet */
+    transform: none !important; /* Disable lateral translation to prevent off-screen clipping and horizontal scroll */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
   }
-  #crop-card-wheat {
-    grid-column: 1 !important;
-    transform: translateX(calc(-30px * (1 - var(--portfolio-progress, 0)))) !important;
-  }
-  #crop-card-rice {
-    grid-column: 2 !important;
-    transform: translateX(calc(30px * (1 - var(--portfolio-progress, 0)))) !important;
-  }
-  #crop-card-sugarcane {
-    grid-column: 1 !important;
-    opacity: var(--portfolio-progress, 0) !important;
-    transform: scale(calc(0.9 + 0.1 * var(--portfolio-progress, 0))) !important;
-  }
+  #crop-card-wheat,
+  #crop-card-rice,
+  #crop-card-sugarcane,
   #crop-card-orchards {
-    grid-column: 2 !important;
-    opacity: var(--portfolio-progress, 0) !important;
-    transform: scale(calc(0.9 + 0.1 * var(--portfolio-progress, 0))) !important;
+    grid-column: auto !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
 @media (max-width: 600px) {
   .portfolio-grid {
     grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    padding: 0 16px;
   }
   .crop-card {
-    height: 320px;
-  }
-  #crop-card-wheat {
-    grid-column: auto !important;
-    transform: translateX(calc(-20px * (1 - var(--portfolio-progress, 0)))) !important;
-  }
-  #crop-card-rice {
-    grid-column: auto !important;
-    transform: translateX(calc(20px * (1 - var(--portfolio-progress, 0)))) !important;
-  }
-  #crop-card-sugarcane {
-    grid-column: auto !important;
-    opacity: var(--portfolio-progress, 0) !important;
-    transform: translateX(calc(-20px * (1 - var(--portfolio-progress, 0)))) scale(calc(0.95 + 0.05 * var(--portfolio-progress, 0))) !important;
-  }
-  #crop-card-orchards {
-    grid-column: auto !important;
-    opacity: var(--portfolio-progress, 0) !important;
-    transform: translateX(calc(20px * (1 - var(--portfolio-progress, 0)))) scale(calc(0.95 + 0.05 * var(--portfolio-progress, 0))) !important;
+    height: 280px; /* Compact landscape height for narrow mobile viewports */
   }
 }
 
