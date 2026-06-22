@@ -35,13 +35,20 @@
   <script>
     (function() {
       const lang = localStorage.getItem('preferred-language');
-      const isUrduPage = window.location.pathname.includes('-ur.html');
+      let pathname = window.location.pathname;
+      const isUrduPage = pathname.includes('-ur.html');
+      
+      // Normalize root path for Vercel
+      if (pathname === '/' || pathname === '') {
+        pathname = '/index.html';
+      }
+      
       if (lang === 'ur' && !isUrduPage) {
-        const newPath = window.location.pathname.replace('.html', '-ur.html') || '/index-ur.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('.html', '-ur.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       } else if (lang === 'en' && isUrduPage) {
-        const newPath = window.location.pathname.replace('-ur.html', '.html') || '/index.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('-ur.html', '.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       }
     })();
   </script>

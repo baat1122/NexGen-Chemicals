@@ -40,13 +40,20 @@
   <script>
     (function() {
       const lang = localStorage.getItem('preferred-language');
-      const isUrduPage = window.location.pathname.includes('-ur.html');
+      let pathname = window.location.pathname;
+      const isUrduPage = pathname.includes('-ur.html');
+      
+      // Normalize root path for Vercel
+      if (pathname === '/' || pathname === '') {
+        pathname = '/index.html';
+      }
+      
       if (lang === 'ur' && !isUrduPage) {
-        const newPath = window.location.pathname.replace('.html', '-ur.html') || '/index-ur.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('.html', '-ur.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       } else if (lang === 'en' && isUrduPage) {
-        const newPath = window.location.pathname.replace('-ur.html', '.html') || '/index.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('-ur.html', '.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       }
     })();
   </script>
@@ -76,17 +83,17 @@
           <li class="nav-item dropdown-trigger">
             <a href="crops-ur.html" class="nav-link active" id="nav-link-crops">فصلیں</a>
             <div class="dropdown-menu">
-              <a href="crops-ur.html#wheat" class="dropdown-item-link">گندم</a>
-              <a href="crops-ur.html#rice" class="dropdown-item-link">چاول</a>
-              <a href="crops-ur.html#sugarcane" class="dropdown-item-link">گنا</a>
-              <a href="crops-ur.html#orchards" class="dropdown-item-link">باغات اور سبزیاں</a>
+              <a href="crops-ur.html#wheat" class="dropdown-item-link">Wheat</a>
+              <a href="crops-ur.html#rice" class="dropdown-item-link">Rice</a>
+              <a href="crops-ur.html#sugarcane" class="dropdown-item-link">Sugarcane</a>
+              <a href="crops-ur.html#orchards" class="dropdown-item-link">Orchards & Veg</a>
             </div>
           </li>
           <li class="nav-item dropdown-trigger">
             <a href="seeds-ur.html" class="nav-link" id="nav-link-seeds">بیج</a>
             <div class="dropdown-menu">
-              <a href="seeds-ur.html#protection" class="dropdown-item-link">ابتدائی تحفظ</a>
-              <a href="seeds-ur.html#treatment" class="dropdown-item-link">بیج کا علاج</a>
+              <a href="seeds-ur.html#protection" class="dropdown-item-link">Early Protection</a>
+              <a href="seeds-ur.html#treatment" class="dropdown-item-link">Seed Treatment</a>
             </div>
           </li>
           
@@ -95,20 +102,20 @@
             <a href="products-ur.html" class="nav-link" id="nav-link-products">مصنوعات</a>
             <div class="mega-menu" id="header-products-mega-menu">
               <div class="mega-category">
-                <h4 class="mega-category-title">فصلوں کی حفاظت</h4>
-                <a href="products.html?category=Herbicide" class="mega-item-link" id="mega-link-herbicide">جڑی بوٹی مار</a>
-                <a href="products.html?category=Insecticide" class="mega-item-link" id="mega-link-insecticide">کیڑے مار دوا</a>
-                <a href="products.html?category=Fungicide" class="mega-item-link" id="mega-link-fungicide">پھپھوندی کش</a>
+                <h4 class="mega-category-title">Crop Protection</h4>
+                <a href="products-ur.html?category=Herbicide" class="mega-item-link" id="mega-link-herbicide">Herbicide</a>
+                <a href="products-ur.html?category=Insecticide" class="mega-item-link" id="mega-link-insecticide">Insecticide</a>
+                <a href="products-ur.html?category=Fungicide" class="mega-item-link" id="mega-link-fungicide">Fungicide</a>
               </div>
               <div class="mega-category">
-                <h4 class="mega-category-title">خصوصی نگہداشت</h4>
-                <a href="products.html?category=Seedcare" class="mega-item-link" id="mega-link-seedcare">سیڈ کیئر</a>
-                <a href="products.html?category=Biologicals" class="mega-item-link" id="mega-link-biologicals">بائیولوجیکلز</a>
+                <h4 class="mega-category-title">Specialty Care</h4>
+                <a href="products-ur.html?category=Seedcare" class="mega-item-link" id="mega-link-seedcare">Seedcare</a>
+                <a href="products-ur.html?category=Biologicals" class="mega-item-link" id="mega-link-biologicals">Biologicals</a>
               </div>
               <div class="mega-category">
-                <h4 class="mega-category-title">فصلوں کی غذائیت</h4>
-                <a href="products.html?category=Bio-Stimulants" class="mega-item-link" id="mega-link-biostimulants">بائیو محرکات</a>
-                <a href="products.html?category=Specialty Nutrition" class="mega-item-link" id="mega-link-nutrition">خصوصی غذائیت</a>
+                <h4 class="mega-category-title">Crop Nutrition</h4>
+                <a href="products-ur.html?category=Bio-Stimulants" class="mega-item-link" id="mega-link-biostimulants">Bio-Stimulants</a>
+                <a href="products-ur.html?category=Specialty Nutrition" class="mega-item-link" id="mega-link-nutrition">Specialty Nutrition</a>
               </div>
               <div class="mega-promo">
                 <div>
@@ -145,7 +152,7 @@
       </nav>
       <div class="header-utils">
         <!-- Language Switcher -->
-        <a href="crops-ur.html" class="lang-switch-link" id="lang-switch-link" data-lang="ur" dir="rtl">EN</a>
+        <a href="crops.html" class="lang-switch-link" id="lang-switch-link" data-lang="en">EN</a>
     
         <a href="https://wa.me/923008990026" class="whatsapp-header-link" target="_blank" rel="noopener noreferrer" id="header-whatsapp-btn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.488 1.459 5.407 1.461 5.487 0 9.954-4.466 9.957-9.953.002-2.657-1.03-5.155-2.905-7.03C17.23 1.758 14.736.726 12.01.725 6.52.725 2.053 5.19 2.05 10.677c-.001 1.93.504 3.812 1.463 5.419l-.993 3.634 3.72-.977zm11.233-6.52c-.329-.165-1.95-.963-2.253-1.074-.303-.11-.523-.165-.743.165-.22.33-.852 1.074-1.045 1.294-.192.22-.385.247-.714.083-.33-.165-1.391-.512-2.65-1.635-.98-.874-1.64-1.953-1.832-2.28-.192-.327-.02-.504.145-.668.148-.148.33-.385.495-.578.165-.192.22-.33.33-.55.11-.22.055-.412-.028-.577-.082-.165-.743-1.79-.1018-2.422-.26-.628-.578-.614-.743-.622-.165-.008-.357-.01-.55-.01-.192 0-.508.073-.77.357-.264.288-1.008.986-1.008 2.404 0 1.417 1.031 2.787 1.176 2.98.145.193 2.03 3.1 4.918 4.346.687.296 1.224.474 1.643.607.69.219 1.32.188 1.817.114.553-.082 1.95-.797 2.226-1.566.275-.769.275-1.43.193-1.566-.083-.138-.303-.22-.633-.385z"/></svg>
         </a>
@@ -160,7 +167,7 @@
   <section class="crops-hero">
     <div class="container">
       <h1>فصلوں کا مشیر</h1>
-      <p>Identify common diseases, optimize spraying schedules, and maximize crop health.</p>
+      <p>عام بیماریوں کی شناخت کریں، سپرے کے نظام کو بہتر بنائیں، اور فصلوں کی صحت کو یقینی بنائیں۔</p>
     </div>
   </section>
 
@@ -168,53 +175,53 @@
   <section class="crops-advisor-section">
     <div class="container">
       
-      <!-- گندم -->
+      <!-- Wheat -->
       <div class="crop-advisor-card" id="wheat">
         <div class="crop-advisor-img">
-          <img src="assets/images/crop_wheat.png" alt="گندم head close-up">
+          <img src="assets/images/crop_wheat.png" alt="Wheat head close-up">
         </div>
         <div class="crop-advisor-info">
           <h3>گندم</h3>
           <p>
-            Gandum Pakistan ki aham tareen khazaak hai. Yellow rust (Peeley Rung ki Kangi) aur Jari Bootiyan (Wild Oats / Dumbi Sitta) yields ko barri hadd tak mutasir karti hain. Sowing se pehle seed treatment aur early growth stage par herbicide spray zaroori hai.
+            گندم پاکستان کی اہم ترین غذائی فصل ہے۔ پیلی کنگی (Yellow rust) اور جنگلی جڑی بوٹیاں پیداوار کو بری طرح متاثر کرتی ہیں۔ بوائی سے پہلے بیج کا علاج اور ابتدائی مرحلے پر جڑی بوٹی مار سپرے انتہائی ضروری ہے۔
           </p>
           <div class="crop-advisor-links">
-            <a href="products.html?category=Herbicide" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">View Herbicides</a>
-            <a href="products.html?category=Fungicide" class="btn-secondary" style="padding: 8px 18px; font-size: 0.85rem;">View Fungicides</a>
+            <a href="products-ur.html?category=Herbicide" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">جڑی بوٹی مار ادویات دیکھیں</a>
+            <a href="products-ur.html?category=Fungicide" class="btn-secondary" style="padding: 8px 18px; font-size: 0.85rem;">پھپھوندی کش ادویات دیکھیں</a>
           </div>
         </div>
       </div>
 
-      <!-- چاول -->
+      <!-- Rice -->
       <div class="crop-advisor-card" id="rice">
         <div class="crop-advisor-img">
-          <img src="assets/images/crop_rice.png" alt="چاول field basmati">
+          <img src="assets/images/crop_rice.png" alt="Rice field basmati">
         </div>
         <div class="crop-advisor-info">
-          <h3>چاول (Chawal / Dhaan)</h3>
+          <h3>چاول (دھان)</h3>
           <p>
-            Dhaan ki fasal me stem borers (tanay ki sundi) aur leaf blast (paton ka jhulsaao) sab se baray khatray hain. Sucking insects ke khatmay ke liye timely spray aur micronutrient (chelated Zinc) application yield ko duna karti hai.
+            دھان کی فصل میں تنے کے بورر (Sundi) اور پتوں کا جھلساؤ (Blast) سب سے بڑے خطرات ہیں۔ کیڑوں کے بروقت کنٹرول اور مائیکرو نیوٹرینٹس (زنک) کا استعمال پیداوار کو دگنا کرتا ہے۔
           </p>
           <div class="crop-advisor-links">
-            <a href="products.html?category=Insecticide" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">View Insecticides</a>
-            <a href="products.html?category=Specialty Nutrition" class="btn-secondary" style="padding: 8px 18px; font-size: 0.85rem;">View Nutrition</a>
+            <a href="products-ur.html?category=Insecticide" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">کیڑے مار ادویات دیکھیں</a>
+            <a href="products-ur.html?category=Specialty Nutrition" class="btn-secondary" style="padding: 8px 18px; font-size: 0.85rem;">غذائی مصنوعات دیکھیں</a>
           </div>
         </div>
       </div>
 
-      <!-- گنا -->
+      <!-- Sugarcane -->
       <div class="crop-advisor-card" id="sugarcane">
         <div class="crop-advisor-img">
-          <img src="assets/images/crop_sugarcane.png" alt="گنا crop stalks">
+          <img src="assets/images/crop_sugarcane.png" alt="Sugarcane crop stalks">
         </div>
         <div class="crop-advisor-info">
-          <h3>گنا (Kamad / Ganna)</h3>
+          <h3>گنا (کماد)</h3>
           <p>
-            Cash crop sugarcane me deemak (termites) aur root borers zameen ke andar se nuksaan pohanchatay hain. Planting ke waqt liquid drenching aur early herbicides ka istemal booton ko mazbooti deta hai.
+            گنے کی فصل میں دیمک اور جڑ کے بورر زمین کے اندر سے نقصان پہنچاتے ہیں۔ بوائی کے وقت مٹی کا علاج اور جڑی بوٹی مار ادویات کا استعمال پودوں کو مضبوط بناتا ہے۔
           </p>
           <div class="crop-advisor-links">
-            <a href="products.html?category=Insecticide" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">View Insecticides</a>
-            <a href="products.html?category=Herbicide" class="btn-secondary" style="padding: 8px 18px; font-size: 0.85rem;">View Herbicides</a>
+            <a href="products-ur.html?category=Insecticide" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">کیڑے مار ادویات دیکھیں</a>
+            <a href="products-ur.html?category=Herbicide" class="btn-secondary" style="padding: 8px 18px; font-size: 0.85rem;">جڑی بوٹی مار ادویات دیکھیں</a>
           </div>
         </div>
       </div>
@@ -225,13 +232,13 @@
           <img src="assets/images/crop_orchard.png" alt="Mango orchards fruit">
         </div>
         <div class="crop-advisor-info">
-          <h3>باغات اور سبزیاںetables (Mango & Citrus)</h3>
+          <h3>باغات اور سبزیاں</h3>
           <p>
-            Aam (mango) aur kinnow (citrus) ke baghaat me flowering se pehle stress aur insect attack thrips ko control karna zaroori hai. Amino acid bio-stimulants extreme temperature fluctuations ke khilaaf resistance paida kartay hain.
+            آم اور مالٹے کے باغات میں پھول آنے سے پہلے موسمی تناؤ اور تھرپس جیسے کیڑوں کا کنٹرول ضروری ہے۔ امینو ایسڈ بائیو محرکات موسمی تبدیلیوں کے خلاف قوتِ مدافعت پیدا کرتے ہیں۔
           </p>
           <div class="crop-advisor-links">
-            <a href="products.html?category=Bio-Stimulants" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">View بائیو محرکات</a>
-            <a href="products.html?category=Biologicals" class="btn-secondary" style="padding: 8px 18px; font-size: 0.85rem;">View بائیولوجیکلز</a>
+            <a href="products-ur.html?category=Bio-Stimulants" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">بائیو محرکات دیکھیں</a>
+            <a href="products-ur.html?category=Biologicals" class="btn-secondary" style="padding: 8px 18px; font-size: 0.85rem;">حیاتیاتی مصنوعات دیکھیں</a>
           </div>
         </div>
       </div>
@@ -255,7 +262,7 @@
           <h4 class="footer-title">لنکس</h4>
           <ul class="footer-links-list">
             <li><a href="index-ur.html" class="footer-link">ہوم</a></li>
-            <li><a href="crops-ur.html" class="footer-link">Crops مشیر</a></li>
+            <li><a href="crops-ur.html" class="footer-link">فصلوں کا مشیر</a></li>
             <li><a href="seeds-ur.html" class="footer-link">بیج</a></li>
             <li><a href="products-ur.html" class="footer-link">مصنوعات</a></li>
           </ul>

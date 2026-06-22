@@ -40,13 +40,20 @@
   <script>
     (function() {
       const lang = localStorage.getItem('preferred-language');
-      const isUrduPage = window.location.pathname.includes('-ur.html');
+      let pathname = window.location.pathname;
+      const isUrduPage = pathname.includes('-ur.html');
+      
+      // Normalize root path for Vercel
+      if (pathname === '/' || pathname === '') {
+        pathname = '/index.html';
+      }
+      
       if (lang === 'ur' && !isUrduPage) {
-        const newPath = window.location.pathname.replace('.html', '-ur.html') || '/index-ur.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('.html', '-ur.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       } else if (lang === 'en' && isUrduPage) {
-        const newPath = window.location.pathname.replace('-ur.html', '.html') || '/index.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('-ur.html', '.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       }
     })();
   </script>
@@ -176,7 +183,7 @@
         <div class="crop-advisor-info">
           <h3>Wheat (Gandum)</h3>
           <p>
-            Gandum Pakistan ki aham tareen khazaak hai. Yellow rust (Peeley Rung ki Kangi) aur Jari Bootiyan (Wild Oats / Dumbi Sitta) yields ko barri hadd tak mutasir karti hain. Sowing se pehle seed treatment aur early growth stage par herbicide spray zaroori hai.
+            Wheat is the primary food grain of Pakistan. Yellow rust and weeds (Wild Oats / Canary Grass) significantly affect yields. Seed treatment before sowing and early-stage herbicide sprays are essential.
           </p>
           <div class="crop-advisor-links">
             <a href="products.html?category=Herbicide" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">View Herbicides</a>
@@ -193,7 +200,7 @@
         <div class="crop-advisor-info">
           <h3>Rice (Chawal / Dhaan)</h3>
           <p>
-            Dhaan ki fasal me stem borers (tanay ki sundi) aur leaf blast (paton ka jhulsaao) sab se baray khatray hain. Sucking insects ke khatmay ke liye timely spray aur micronutrient (chelated Zinc) application yield ko duna karti hai.
+            In rice crops, stem borers and leaf blast are the major threats. Timely spraying to control sucking insects and application of micronutrients (chelated Zinc) double the crop yield.
           </p>
           <div class="crop-advisor-links">
             <a href="products.html?category=Insecticide" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">View Insecticides</a>
@@ -210,7 +217,7 @@
         <div class="crop-advisor-info">
           <h3>Sugarcane (Kamad / Ganna)</h3>
           <p>
-            Cash crop sugarcane me deemak (termites) aur root borers zameen ke andar se nuksaan pohanchatay hain. Planting ke waqt liquid drenching aur early herbicides ka istemal booton ko mazbooti deta hai.
+            In the sugarcane cash crop, termites and root borers cause damage from beneath the soil. Liquid drenching at planting and early use of herbicides strengthen the plant shoots.
           </p>
           <div class="crop-advisor-links">
             <a href="products.html?category=Insecticide" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">View Insecticides</a>
@@ -227,7 +234,7 @@
         <div class="crop-advisor-info">
           <h3>Orchards & Vegetables (Mango & Citrus)</h3>
           <p>
-            Aam (mango) aur kinnow (citrus) ke baghaat me flowering se pehle stress aur insect attack thrips ko control karna zaroori hai. Amino acid bio-stimulants extreme temperature fluctuations ke khilaaf resistance paida kartay hain.
+            In mango and citrus orchards, it is essential to control stress and insect attacks like thrips before flowering. Amino acid bio-stimulants build resistance against extreme temperature fluctuations.
           </p>
           <div class="crop-advisor-links">
             <a href="products.html?category=Bio-Stimulants" class="btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">View Bio-Stimulants</a>

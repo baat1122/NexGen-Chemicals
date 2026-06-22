@@ -33,13 +33,20 @@
   <script>
     (function() {
       const lang = localStorage.getItem('preferred-language');
-      const isUrduPage = window.location.pathname.includes('-ur.html');
+      let pathname = window.location.pathname;
+      const isUrduPage = pathname.includes('-ur.html');
+      
+      // Normalize root path for Vercel
+      if (pathname === '/' || pathname === '') {
+        pathname = '/index.html';
+      }
+      
       if (lang === 'ur' && !isUrduPage) {
-        const newPath = window.location.pathname.replace('.html', '-ur.html') || '/index-ur.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('.html', '-ur.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       } else if (lang === 'en' && isUrduPage) {
-        const newPath = window.location.pathname.replace('-ur.html', '.html') || '/index.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('-ur.html', '.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       }
     })();
   </script>
@@ -202,7 +209,7 @@
       <div class="careers-apply-info" id="apply" style="margin-top: 50px; background-color: var(--bg-secondary); padding: 40px; border-radius: 24px; border: 1px solid var(--border-color); text-align: center; box-shadow: var(--card-shadow); transition: background-color 0.4s var(--ease-framer), border-color 0.4s var(--ease-framer);">
         <h3 style="font-family: var(--font-heading); font-size: 1.8rem; color: var(--accent); margin-bottom: 15px;">How to Apply</h3>
         <p style="color: var(--text-secondary); font-size: 1.05rem; max-width: 700px; margin: 0 auto 24px; line-height: 1.7;">
-          Humari growth team ka hissa banne ke liye apna CV/Resume seedha hamare HR department ko <a href="mailto:nexgenchemicalz@gmail.com" style="color: var(--accent); font-weight: 700; text-decoration: underline;">nexgenchemicalz@gmail.com</a> par bhaijein. Subject line me position ka naam zaroor likhein.
+          To join our growth team, please send your CV/Resume directly to our HR department at <a href="mailto:nexgenchemicalz@gmail.com" style="color: var(--accent); font-weight: 700; text-decoration: underline;">nexgenchemicalz@gmail.com</a>. Please make sure to include the position name in the subject line.
         </p>
         <a href="mailto:nexgenchemicalz@gmail.com?subject=NexGen%20Chemicals%20Job%20Application" class="btn-primary" style="padding: 12px 32px;">Email Your CV</a>
       </div>

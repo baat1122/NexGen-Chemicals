@@ -41,13 +41,20 @@
   <script>
     (function() {
       const lang = localStorage.getItem('preferred-language');
-      const isUrduPage = window.location.pathname.includes('-ur.html');
+      let pathname = window.location.pathname;
+      const isUrduPage = pathname.includes('-ur.html');
+      
+      // Normalize root path for Vercel
+      if (pathname === '/' || pathname === '') {
+        pathname = '/index.html';
+      }
+      
       if (lang === 'ur' && !isUrduPage) {
-        const newPath = window.location.pathname.replace('.html', '-ur.html') || '/index-ur.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('.html', '-ur.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       } else if (lang === 'en' && isUrduPage) {
-        const newPath = window.location.pathname.replace('-ur.html', '.html') || '/index.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('-ur.html', '.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       }
     })();
   </script>
@@ -161,7 +168,7 @@
   <section class="contact-hero">
     <div class="container">
       <h1>Contact Us</h1>
-      <p>Hum se rabta karein. Aapki fasal ki behtari ke liye hum har waqt hazir hain.</p>
+      <p>Get in touch with us. We are always here to help you optimize your crop yields.</p>
     </div>
   </section>
 
@@ -221,7 +228,7 @@
                 <input type="tel" id="contact-phone" class="form-control" required placeholder="Example: 03001234567">
               </div>
               <div class="form-group">
-                <label class="form-label" for="contact-crop">Target Crop (Fasal)</label>
+                <label class="form-label" for="contact-crop">Target Crop</label>
                 <input type="text" id="contact-crop" class="form-control" placeholder="Example: Gandum, Kapas, Dhaan">
               </div>
               <div class="form-group">

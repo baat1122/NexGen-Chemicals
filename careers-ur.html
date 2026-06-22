@@ -33,13 +33,20 @@
   <script>
     (function() {
       const lang = localStorage.getItem('preferred-language');
-      const isUrduPage = window.location.pathname.includes('-ur.html');
+      let pathname = window.location.pathname;
+      const isUrduPage = pathname.includes('-ur.html');
+      
+      // Normalize root path for Vercel
+      if (pathname === '/' || pathname === '') {
+        pathname = '/index.html';
+      }
+      
       if (lang === 'ur' && !isUrduPage) {
-        const newPath = window.location.pathname.replace('.html', '-ur.html') || '/index-ur.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('.html', '-ur.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       } else if (lang === 'en' && isUrduPage) {
-        const newPath = window.location.pathname.replace('-ur.html', '.html') || '/index.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('-ur.html', '.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       }
     })();
   </script>
@@ -72,14 +79,14 @@
               <a href="crops-ur.html#wheat" class="dropdown-item-link">Wheat</a>
               <a href="crops-ur.html#rice" class="dropdown-item-link">Rice</a>
               <a href="crops-ur.html#sugarcane" class="dropdown-item-link">Sugarcane</a>
-              <a href="crops-ur.html#orchards" class="dropdown-item-link">باغات اور سبزیاں</a>
+              <a href="crops-ur.html#orchards" class="dropdown-item-link">Orchards & Veg</a>
             </div>
           </li>
           <li class="nav-item dropdown-trigger">
             <a href="seeds-ur.html" class="nav-link" id="nav-link-seeds">بیج</a>
             <div class="dropdown-menu">
-              <a href="seeds-ur.html#protection" class="dropdown-item-link">ابتدائی تحفظ</a>
-              <a href="seeds-ur.html#treatment" class="dropdown-item-link">بیج کا علاج</a>
+              <a href="seeds-ur.html#protection" class="dropdown-item-link">Early Protection</a>
+              <a href="seeds-ur.html#treatment" class="dropdown-item-link">Seed Treatment</a>
             </div>
           </li>
           
@@ -88,20 +95,20 @@
             <a href="products-ur.html" class="nav-link" id="nav-link-products">مصنوعات</a>
             <div class="mega-menu" id="header-products-mega-menu">
               <div class="mega-category">
-                <h4 class="mega-category-title">فصلوں کی حفاظت</h4>
-                <a href="products.html?category=Herbicide" class="mega-item-link" id="mega-link-herbicide">جڑی بوٹی مار</a>
-                <a href="products.html?category=Insecticide" class="mega-item-link" id="mega-link-insecticide">کیڑے مار دوا</a>
-                <a href="products.html?category=Fungicide" class="mega-item-link" id="mega-link-fungicide">پھپھوندی کش</a>
+                <h4 class="mega-category-title">Crop Protection</h4>
+                <a href="products-ur.html?category=Herbicide" class="mega-item-link" id="mega-link-herbicide">Herbicide</a>
+                <a href="products-ur.html?category=Insecticide" class="mega-item-link" id="mega-link-insecticide">Insecticide</a>
+                <a href="products-ur.html?category=Fungicide" class="mega-item-link" id="mega-link-fungicide">Fungicide</a>
               </div>
               <div class="mega-category">
-                <h4 class="mega-category-title">خصوصی نگہداشت</h4>
-                <a href="products.html?category=Seedcare" class="mega-item-link" id="mega-link-seedcare">سیڈ کیئر</a>
-                <a href="products.html?category=Biologicals" class="mega-item-link" id="mega-link-biologicals">بائیولوجیکلز</a>
+                <h4 class="mega-category-title">Specialty Care</h4>
+                <a href="products-ur.html?category=Seedcare" class="mega-item-link" id="mega-link-seedcare">Seedcare</a>
+                <a href="products-ur.html?category=Biologicals" class="mega-item-link" id="mega-link-biologicals">Biologicals</a>
               </div>
               <div class="mega-category">
-                <h4 class="mega-category-title">فصلوں کی غذائیت</h4>
-                <a href="products.html?category=Bio-Stimulants" class="mega-item-link" id="mega-link-biostimulants">بائیو محرکات</a>
-                <a href="products.html?category=Specialty Nutrition" class="mega-item-link" id="mega-link-nutrition">خصوصی غذائیت</a>
+                <h4 class="mega-category-title">Crop Nutrition</h4>
+                <a href="products-ur.html?category=Bio-Stimulants" class="mega-item-link" id="mega-link-biostimulants">Bio-Stimulants</a>
+                <a href="products-ur.html?category=Specialty Nutrition" class="mega-item-link" id="mega-link-nutrition">Specialty Nutrition</a>
               </div>
               <div class="mega-promo">
                 <div>
@@ -138,7 +145,7 @@
       </nav>
       <div class="header-utils">
         <!-- Language Switcher -->
-        <a href="careers-ur.html" class="lang-switch-link" id="lang-switch-link" data-lang="ur" dir="rtl">EN</a>
+        <a href="careers.html" class="lang-switch-link" id="lang-switch-link" data-lang="en">EN</a>
     
         <a href="https://wa.me/923008990026" class="whatsapp-header-link" target="_blank" rel="noopener noreferrer" id="header-whatsapp-btn"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.488 1.459 5.407 1.461 5.487 0 9.954-4.466 9.957-9.953.002-2.657-1.03-5.155-2.905-7.03C17.23 1.758 14.736.726 12.01.725 6.52.725 2.053 5.19 2.05 10.677c-.001 1.93.504 3.812 1.463 5.419l-.993 3.634 3.72-.977zm11.233-6.52c-.329-.165-1.95-.963-2.253-1.074-.303-.11-.523-.165-.743.165-.22.33-.852 1.074-1.045 1.294-.192.22-.385.247-.714.083-.33-.165-1.391-.512-2.65-1.635-.98-.874-1.64-1.953-1.832-2.28-.192-.327-.02-.504.145-.668.148-.148.33-.385.495-.578.165-.192.22-.33.33-.55.11-.22.055-.412-.028-.577-.082-.165-.743-1.79-.1018-2.422-.26-.628-.578-.614-.743-.622-.165-.008-.357-.01-.55-.01-.192 0-.508.073-.77.357-.264.288-1.008.986-1.008 2.404 0 1.417 1.031 2.787 1.176 2.98.145.193 2.03 3.1 4.918 4.346.687.296 1.224.474 1.643.607.69.219 1.32.188 1.817.114.553-.082 1.95-.797 2.226-1.566.275-.769.275-1.43.193-1.566-.083-.138-.303-.22-.633-.385z"/></svg>
         </a>
@@ -153,22 +160,22 @@
   <section class="careers-hero">
     <div class="container">
       <h1>نیکس جین میں کیریئر</h1>
-      <p>Join a team dedicated to advancing Pakistani agriculture through next-generation chemistry.</p>
+      <p>جدید ترین کیمسٹری کے ذریعے پاکستان کی زراعت کو آگے بڑھانے کے لیے کوشاں پیشہ ور افراد کی ٹیم میں شامل ہوں۔</p>
     </div>
   </section>
 
   <!-- Job Listing -->
   <section class="careers-section" id="positions">
     <div class="container">
-      <h2>Open Positions</h2>
+      <h2>موجودہ ملازمتیں</h2>
       <div class="jobs-list">
         
         <div class="job-card">
           <div class="job-info">
-            <h3>Territory Sales Manager</h3>
+            <h3>ٹیرٹری سیلز مینیجر</h3>
             <div class="job-meta">
-              <span>Location: Multan / Khanewal</span>
-              <span>Department: سیلز اور مارکیٹنگ</span>
+              <span>مقام: ملتان / خانیوال</span>
+              <span>شعبہ: سیلز اور مارکیٹنگ</span>
             </div>
           </div>
           <a href="mailto:nexgenchemicalz@gmail.com?subject=Application:%20Territory%20Sales%20Manager" class="btn-primary">درخواست دیں</a>
@@ -176,10 +183,10 @@
 
         <div class="job-card">
           <div class="job-info">
-            <h3>Associate Agronomist</h3>
+            <h3>ایسوسی ایٹ ایگرونومسٹ</h3>
             <div class="job-meta">
-              <span>Location: Vehari / Faisalabad</span>
-              <span>Department: Field Advisory</span>
+              <span>مقام: وہاڑی / فیصل آباد</span>
+              <span>شعبہ: فیلڈ ایڈوائزری</span>
             </div>
           </div>
           <a href="mailto:nexgenchemicalz@gmail.com?subject=Application:%20Associate%20Agronomist" class="btn-primary">درخواست دیں</a>
@@ -187,10 +194,10 @@
 
         <div class="job-card">
           <div class="job-info">
-            <h3>کوالٹی کنٹرول Analyst</h3>
+            <h3>کوالٹی کنٹرول اینالسٹ</h3>
             <div class="job-meta">
-              <span>Location: Vehari Factory</span>
-              <span>Department: Lab Operations</span>
+              <span>مقام: وہاڑی فیکٹری</span>
+              <span>شعبہ: لیب آپریشنز</span>
             </div>
           </div>
           <a href="mailto:nexgenchemicalz@gmail.com?subject=Application:%20Quality%20Control%20Analyst" class="btn-primary">درخواست دیں</a>
@@ -198,13 +205,13 @@
 
       </div>
 
-      <!-- How to Apply Info Card -->
+      <!-- درخواست دینے کا طریقہ Info Card -->
       <div class="careers-apply-info" id="apply" style="margin-top: 50px; background-color: var(--bg-secondary); padding: 40px; border-radius: 24px; border: 1px solid var(--border-color); text-align: center; box-shadow: var(--card-shadow); transition: background-color 0.4s var(--ease-framer), border-color 0.4s var(--ease-framer);">
-        <h3 style="font-family: var(--font-heading); font-size: 1.8rem; color: var(--accent); margin-bottom: 15px;">How to Apply</h3>
+        <h3 style="font-family: var(--font-heading); font-size: 1.8rem; color: var(--accent); margin-bottom: 15px;">درخواست دینے کا طریقہ</h3>
         <p style="color: var(--text-secondary); font-size: 1.05rem; max-width: 700px; margin: 0 auto 24px; line-height: 1.7;">
-          Humari growth team ka hissa banne ke liye apna CV/Resume seedha hamare HR department ko <a href="mailto:nexgenchemicalz@gmail.com" style="color: var(--accent); font-weight: 700; text-decoration: underline;">nexgenchemicalz@gmail.com</a> par bhaijein. Subject line me position ka naam zaroor likhein.
+          ہماری ٹیم کا حصہ بننے کے لیے اپنی سی وی براہ راست ہمارے ایچ آر شعبہ کو <a href="mailto:nexgenchemicalz@gmail.com" style="color: var(--accent); font-weight: 700; text-decoration: underline;">nexgenchemicalz@gmail.com</a> پر بھیجیں۔ سبجیکٹ لائن میں پوزیشن کا نام لازمی لکھیں۔
         </p>
-        <a href="mailto:nexgenchemicalz@gmail.com?subject=NexGen%20Chemicals%20Job%20Application" class="btn-primary" style="padding: 12px 32px;">Email Your CV</a>
+        <a href="mailto:nexgenchemicalz@gmail.com?subject=NexGen%20Chemicals%20Job%20Application" class="btn-primary" style="padding: 12px 32px;">سی وی ای میل کریں</a>
       </div>
 
     </div>
@@ -226,7 +233,7 @@
           <h4 class="footer-title">لنکس</h4>
           <ul class="footer-links-list">
             <li><a href="index-ur.html" class="footer-link">ہوم</a></li>
-            <li><a href="crops-ur.html" class="footer-link">Crops مشیر</a></li>
+            <li><a href="crops-ur.html" class="footer-link">فصلوں کا مشورہ</a></li>
             <li><a href="seeds-ur.html" class="footer-link">بیج</a></li>
             <li><a href="products-ur.html" class="footer-link">مصنوعات</a></li>
           </ul>

@@ -16,13 +16,20 @@
   <script>
     (function() {
       const lang = localStorage.getItem('preferred-language');
-      const isUrduPage = window.location.pathname.includes('-ur.html');
+      let pathname = window.location.pathname;
+      const isUrduPage = pathname.includes('-ur.html');
+      
+      // Normalize root path for Vercel
+      if (pathname === '/' || pathname === '') {
+        pathname = '/index.html';
+      }
+      
       if (lang === 'ur' && !isUrduPage) {
-        const newPath = window.location.pathname.replace('.html', '-ur.html') || '/index-ur.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('.html', '-ur.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       } else if (lang === 'en' && isUrduPage) {
-        const newPath = window.location.pathname.replace('-ur.html', '.html') || '/index.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('-ur.html', '.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       }
     })();
   </script>
@@ -325,7 +332,7 @@
     <div class="container">
       <div class="services-scroller-title">
         <h2>Crop Solutions & Services</h2>
-        <p>Humari behtareen technologies aur specialized formulations aapki fasal ki hifazat karti hain.</p>
+        <p>Our advanced technologies and specialized formulations safeguard your crops.</p>
       </div>
 
       <div class="categories-grid-container">
@@ -674,7 +681,7 @@
     <div class="container">
       <div class="portfolio-header">
         <h2>Empowering Local Agriculture</h2>
-        <p>Pakistani zameen aur aabo-hawa ke mutabiq tayaar karda success stories.</p>
+        <p>Success stories tailored to Pakistan's soil and climatic conditions.</p>
       </div>
 
       <div class="portfolio-grid" id="crop-expandable-grid">
@@ -726,8 +733,8 @@
   <section class="testimonials-section" id="farmers-testimonials">
     <div class="container">
       <div class="testimonials-header">
-        <h2>Hamare Kisaan, Hamari Kamyabi</h2>
-        <p>Pakistan bhar ke zameendaron ki zubani NexGen Chemicals ke nataij.</p>
+        <h2>Our Farmers, Our Success</h2>
+        <p>Feedback from farmers across Pakistan on the results of NexGen Chemicals.</p>
       </div>
 
       <div class="testimonials-slider-wrapper" style="position: relative;">
@@ -745,7 +752,7 @@
           <div class="testimonial-card" id="review-card-asif">
             <div class="testimonial-stars">★★★★★</div>
             <p class="testimonial-text">
-              "NexGen ki spray use karne ke baad gandum ki fasal bemariyo se bilkul mehfooz rahi. Yield bohot zabardast mili hai!"
+              "After using NexGen sprays, my wheat crop remained completely safe from diseases. The yield was outstanding!"
             </p>
             <div class="testimonial-user">
               <div class="testimonial-avatar">
@@ -753,7 +760,7 @@
               </div>
               <div>
                 <h4 class="testimonial-name">Asif Khan</h4>
-                <span class="testimonial-location">Zameendar, Khanewal</span>
+                <span class="testimonial-location">Farmer, Khanewal</span>
               </div>
             </div>
           </div>
@@ -762,7 +769,7 @@
           <div class="testimonial-card" id="review-card-tariq">
             <div class="testimonial-stars">★★★★★</div>
             <p class="testimonial-text">
-              "Best quality products! Inkay Bio-Stimulants ne hamare mango ke baagh ko aik nayi jaan de di. Highly recommended."
+              "Best quality products! Their Bio-Stimulants gave new life to our mango orchard. Highly recommended."
             </p>
             <div class="testimonial-user">
               <div class="testimonial-avatar">
@@ -770,7 +777,7 @@
               </div>
               <div>
                 <h4 class="testimonial-name">Mian Tariq</h4>
-                <span class="testimonial-location">Baghban, Multan</span>
+                <span class="testimonial-location">Orchardist, Multan</span>
               </div>
             </div>
           </div>
@@ -779,7 +786,7 @@
           <div class="testimonial-card" id="review-card-nabeel">
             <div class="testimonial-stars">★★★★★</div>
             <p class="testimonial-text">
-              "Insecticide ka result kamal hai. Pura season barishon ke bawajood fasal makhki aur kire makoray se bachi rahi."
+              "The insecticide result is amazing. Despite rains throughout the season, the crop was saved from whitefly and other pests."
             </p>
             <div class="testimonial-user">
               <div class="testimonial-avatar">
@@ -796,7 +803,7 @@
           <div class="testimonial-card" id="review-card-iqbal">
             <div class="testimonial-stars">★★★★★</div>
             <p class="testimonial-text">
-              "NexGen Chemicals ke sprays ne hamari aaloo aur makai ki yield ko bohot barha diya hai. In ki delivery aur advisory team bohot achi hai."
+              "Sprays from NexGen Chemicals have greatly increased our potato and maize yields. Their delivery and advisory team is very good."
             </p>
             <div class="testimonial-user">
               <div class="testimonial-avatar">
@@ -804,7 +811,7 @@
               </div>
               <div>
                 <h4 class="testimonial-name">Muhammad Iqbal</h4>
-                <span class="testimonial-location">Kisaan, Sahiwal</span>
+                <span class="testimonial-location">Farmer, Sahiwal</span>
               </div>
             </div>
           </div>
@@ -813,7 +820,7 @@
           <div class="testimonial-card" id="review-card-farhan">
             <div class="testimonial-stars">★★★★★</div>
             <p class="testimonial-text">
-              "Dhaan ki fasal ko sundi aur blast se bachane ke liye NexGen insecticides ka koi sani nahi. Poora ilaqa inhi ki adviaat istemal kar raha hai."
+              "For protecting the rice crop against stem borer and blast, there is no match for NexGen insecticides. The entire region uses their products."
             </p>
             <div class="testimonial-user">
               <div class="testimonial-avatar">
@@ -821,7 +828,7 @@
               </div>
               <div>
                 <h4 class="testimonial-name">Syed Farhan</h4>
-                <span class="testimonial-location">Zameendar, Rahim Yar Khan</span>
+                <span class="testimonial-location">Farmer, Rahim Yar Khan</span>
               </div>
             </div>
           </div>
@@ -836,7 +843,7 @@
     <div class="container">
       <div class="blogs-header">
         <h2>Knowledge Hub</h2>
-        <p>Fasal ki dekh-bhaal ke liye jadeed maahirana mashwaray aur research.</p>
+        <p>Modern expert advice and research for crop care.</p>
       </div>
 
       <div class="blog-grid" id="blogs-container-grid">

@@ -73,12 +73,25 @@ function initCatalogPage() {
   function renderProducts(category, query) {
     grid.innerHTML = '';
     const filtered = catalogProducts.filter(prod => {
-      const matchesCategory = (category === 'All' || isUrdu ? (prod.category_ur || prod.category) : prod.category === category);
-      const matchesQuery = !query || 
-        isUrdu ? (prod.name_ur || prod.name) : prod.name.toLowerCase().includes(query.toLowerCase()) ||
-        isUrdu ? (prod.tagline_ur || prod.tagline) : prod.tagline.toLowerCase().includes(query.toLowerCase()) ||
-        prod.composition.toLowerCase().includes(query.toLowerCase()) ||
-        prod.target.toLowerCase().includes(query.toLowerCase());
+      const matchesCategory = category === 'All' || prod.category === category;
+      
+      let matchesQuery = true;
+      if (query) {
+        const lowerQuery = query.toLowerCase();
+        if (isUrdu) {
+          const nameMatch = (prod.name_ur || '').toLowerCase().includes(lowerQuery) || prod.name.toLowerCase().includes(lowerQuery);
+          const taglineMatch = (prod.tagline_ur || '').toLowerCase().includes(lowerQuery) || prod.tagline.toLowerCase().includes(lowerQuery);
+          const compMatch = (prod.composition_ur || prod.composition || '').toLowerCase().includes(lowerQuery);
+          const targetMatch = (prod.target_ur || prod.target || '').toLowerCase().includes(lowerQuery);
+          matchesQuery = nameMatch || taglineMatch || compMatch || targetMatch;
+        } else {
+          const nameMatch = prod.name.toLowerCase().includes(lowerQuery);
+          const taglineMatch = prod.tagline.toLowerCase().includes(lowerQuery);
+          const compMatch = prod.composition.toLowerCase().includes(lowerQuery);
+          const targetMatch = prod.target.toLowerCase().includes(lowerQuery);
+          matchesQuery = nameMatch || taglineMatch || compMatch || targetMatch;
+        }
+      }
       
       return matchesCategory && matchesQuery;
     });
@@ -95,19 +108,19 @@ function initCatalogPage() {
       
       card.innerHTML = `
         <div class="product-card-top">
-          <span class="product-category">${prod.category}</span>
+          <span class="product-category">${isUrdu ? (prod.category_ur || prod.category) : prod.category}</span>
           <div class="product-packshot-wrapper">
             <img class="product-packshot-img" src="${prod.packshot}" alt="${prod.name} Packshot" loading="lazy">
           </div>
           <div class="product-info">
-            <h3 class="product-name">${prod.name}</h3>
-            <p class="product-tagline">${prod.tagline}</p>
+            <h3 class="product-name">${isUrdu ? (prod.name_ur || prod.name) : prod.name}</h3>
+            <p class="product-tagline">${isUrdu ? (prod.tagline_ur || prod.tagline) : prod.tagline}</p>
             <div class="product-price">Rs. ${prod.price.toLocaleString('en-US')}</div>
           </div>
         </div>
         <div class="product-card-bottom">
-          <a class="product-learn-more-btn" href="product-detail.html?product=${prod.id}">
-            Learn More
+          <a class="product-learn-more-btn" href="${isUrdu ? 'product-detail-ur.html' : 'product-detail.html'}?product=${prod.id}">
+            ${isUrdu ? 'تفصیلات دیکھیں' : 'Learn More'}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>

@@ -37,13 +37,20 @@
   <script>
     (function() {
       const lang = localStorage.getItem('preferred-language');
-      const isUrduPage = window.location.pathname.includes('-ur.html');
+      let pathname = window.location.pathname;
+      const isUrduPage = pathname.includes('-ur.html');
+      
+      // Normalize root path for Vercel
+      if (pathname === '/' || pathname === '') {
+        pathname = '/index.html';
+      }
+      
       if (lang === 'ur' && !isUrduPage) {
-        const newPath = window.location.pathname.replace('.html', '-ur.html') || '/index-ur.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('.html', '-ur.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       } else if (lang === 'en' && isUrduPage) {
-        const newPath = window.location.pathname.replace('-ur.html', '.html') || '/index.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('-ur.html', '.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       }
     })();
   </script>
@@ -168,7 +175,7 @@
         <div class="col-7 seeds-intro">
           <h3>The Importance of Early Protection</h3>
           <p>
-            Healthy crops begin with secure seeds. Freshly sown seeds and emerging seedlings are vulnerable to subterranean termites (deemak), damping-off fungi, and soil-borne pathogens. Early stress at this stage can result in patchy crop rows and poor plant stands.
+            Healthy crops begin with secure seeds. Freshly sown seeds and emerging seedlings are vulnerable to subterranean termites, damping-off fungi, and soil-borne pathogens. Early stress at this stage can result in patchy crop rows and poor plant stands.
           </p>
           <p>
             NexGen Seedcare coatings provide systemic protection. They envelope seeds in a defensive barrier, boosting root systems and seedling strength from day one.
@@ -185,7 +192,7 @@
 
       <!-- Seed Treatment Guide -->
       <div class="seeds-treatment-guide" id="treatment">
-        <h3>How to Treat Seeds (Beej Upchaar Tariqa)</h3>
+        <h3>How to Treat Seeds</h3>
         <ul class="step-list">
           <li class="step-item">
             <div class="step-number">1</div>

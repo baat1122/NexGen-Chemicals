@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Detailed technical specification and application instructions for NexGen Chemicals products. View active composition, target pests, crop dosage charts, and application precautions.">
+  <meta name="description" content="نیکس جین کیمیکلز کی مصنوعات کی تکنیکی تفصیلات اور استعمال کی ہدایات۔ فعال اجزاء، ہدف کیڑے، تجویز کردہ خوراک کا چارٹ اور احتیاطی تدابیر دیکھیں۔">
   <meta name="keywords" content="dosage charts, active chemical composition, pesticide safety, agricultural dosage, spray instructions">
   <meta name="author" content="NexGen Chemicals">
-  <title>Product Details | NexGen Chemicals</title>
+  <title>پروڈکٹ کی تفصیلات | نیکس جین کیمیکلز</title>
   
   <!-- Style Links -->
   <link rel="stylesheet" href="assets/css/style.css">
@@ -16,13 +16,20 @@
   <script>
     (function() {
       const lang = localStorage.getItem('preferred-language');
-      const isUrduPage = window.location.pathname.includes('-ur.html');
+      let pathname = window.location.pathname;
+      const isUrduPage = pathname.includes('-ur.html');
+      
+      // Normalize root path for Vercel
+      if (pathname === '/' || pathname === '') {
+        pathname = '/index.html';
+      }
+      
       if (lang === 'ur' && !isUrduPage) {
-        const newPath = window.location.pathname.replace('.html', '-ur.html') || '/index-ur.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('.html', '-ur.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       } else if (lang === 'en' && isUrduPage) {
-        const newPath = window.location.pathname.replace('-ur.html', '.html') || '/index.html';
-        window.location.replace(newPath + window.location.search);
+        const newPath = pathname.replace('-ur.html', '.html');
+        window.location.replace(newPath + window.location.search + window.location.hash);
       }
     })();
   </script>
@@ -58,14 +65,14 @@
               <a href="crops-ur.html#wheat" class="dropdown-item-link">Wheat</a>
               <a href="crops-ur.html#rice" class="dropdown-item-link">Rice</a>
               <a href="crops-ur.html#sugarcane" class="dropdown-item-link">Sugarcane</a>
-              <a href="crops-ur.html#orchards" class="dropdown-item-link">باغات اور سبزیاں</a>
+              <a href="crops-ur.html#orchards" class="dropdown-item-link">Orchards & Veg</a>
             </div>
           </li>
           <li class="nav-item dropdown-trigger">
             <a href="seeds-ur.html" class="nav-link" id="nav-link-seeds">بیج</a>
             <div class="dropdown-menu">
-              <a href="seeds-ur.html#protection" class="dropdown-item-link">ابتدائی تحفظ</a>
-              <a href="seeds-ur.html#treatment" class="dropdown-item-link">بیج کا علاج</a>
+              <a href="seeds-ur.html#protection" class="dropdown-item-link">Early Protection</a>
+              <a href="seeds-ur.html#treatment" class="dropdown-item-link">Seed Treatment</a>
             </div>
           </li>
           
@@ -74,20 +81,20 @@
             <a href="products-ur.html" class="nav-link active" id="nav-link-products">مصنوعات</a>
             <div class="mega-menu" id="header-products-mega-menu">
               <div class="mega-category">
-                <h4 class="mega-category-title">فصلوں کی حفاظت</h4>
-                <a href="products.html?category=Herbicide" class="mega-item-link" id="mega-link-herbicide">جڑی بوٹی مار</a>
-                <a href="products.html?category=Insecticide" class="mega-item-link" id="mega-link-insecticide">کیڑے مار دوا</a>
-                <a href="products.html?category=Fungicide" class="mega-item-link" id="mega-link-fungicide">پھپھوندی کش</a>
+                <h4 class="mega-category-title">Crop Protection</h4>
+                <a href="products-ur.html?category=Herbicide" class="mega-item-link" id="mega-link-herbicide">Herbicide</a>
+                <a href="products-ur.html?category=Insecticide" class="mega-item-link" id="mega-link-insecticide">Insecticide</a>
+                <a href="products-ur.html?category=Fungicide" class="mega-item-link" id="mega-link-fungicide">Fungicide</a>
               </div>
               <div class="mega-category">
-                <h4 class="mega-category-title">خصوصی نگہداشت</h4>
-                <a href="products.html?category=Seedcare" class="mega-item-link" id="mega-link-seedcare">سیڈ کیئر</a>
-                <a href="products.html?category=Biologicals" class="mega-item-link" id="mega-link-biologicals">بائیولوجیکلز</a>
+                <h4 class="mega-category-title">Specialty Care</h4>
+                <a href="products-ur.html?category=Seedcare" class="mega-item-link" id="mega-link-seedcare">Seedcare</a>
+                <a href="products-ur.html?category=Biologicals" class="mega-item-link" id="mega-link-biologicals">Biologicals</a>
               </div>
               <div class="mega-category">
-                <h4 class="mega-category-title">فصلوں کی غذائیت</h4>
-                <a href="products.html?category=Bio-Stimulants" class="mega-item-link" id="mega-link-biostimulants">بائیو محرکات</a>
-                <a href="products.html?category=Specialty Nutrition" class="mega-item-link" id="mega-link-nutrition">خصوصی غذائیت</a>
+                <h4 class="mega-category-title">Crop Nutrition</h4>
+                <a href="products-ur.html?category=Bio-Stimulants" class="mega-item-link" id="mega-link-biostimulants">Bio-Stimulants</a>
+                <a href="products-ur.html?category=Specialty Nutrition" class="mega-item-link" id="mega-link-nutrition">Specialty Nutrition</a>
               </div>
               <div class="mega-promo">
                 <div>
@@ -126,7 +133,7 @@
       <!-- Utilities Header Controls -->
       <div class="header-utils">
         <!-- Language Switcher -->
-        <a href="product-detail-ur.html" class="lang-switch-link" id="lang-switch-link" data-lang="ur" dir="rtl">EN</a>
+        <a href="product-detail.html" class="lang-switch-link" id="lang-switch-link" data-lang="en">EN</a>
     
         <a href="https://wa.me/923008990026" class="whatsapp-header-link" target="_blank" rel="noopener noreferrer" id="header-whatsapp-btn" title="Contact WhatsApp">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -263,7 +270,7 @@
           <h4 class="footer-title">لنکس</h4>
           <ul class="footer-links-list">
             <li><a href="index-ur.html" class="footer-link">ہوم</a></li>
-            <li><a href="crops-ur.html" class="footer-link">Crops مشیر</a></li>
+            <li><a href="crops-ur.html" class="footer-link">فصلوں کا مشورہ</a></li>
             <li><a href="seeds-ur.html" class="footer-link">بیج</a></li>
             <li><a href="products-ur.html" class="footer-link">مصنوعات</a></li>
           </ul>
