@@ -146,12 +146,14 @@ button {
 /* Helper columns class mappings */
 .col-12 { grid-column: span 12; }
 .col-8 { grid-column: span 8; }
+.col-7 { grid-column: span 7; }
 .col-6 { grid-column: span 6; }
+.col-5 { grid-column: span 5; }
 .col-4 { grid-column: span 4; }
 .col-3 { grid-column: span 3; }
 
 @media (max-width: 768px) {
-  .col-8, .col-6, .col-4, .col-3 {
+  .col-8, .col-7, .col-6, .col-5, .col-4, .col-3 {
     grid-column: span 12;
   }
 }
@@ -750,6 +752,23 @@ button {
   .mega-menu-trigger.active > .mega-menu {
     display: grid;
   }
+
+  /* Mobile Header & Footer Layout Optimizations */
+  .header-utils {
+    gap: 12px;
+  }
+  .footer-brand-col,
+  .footer-nav-col,
+  .footer-contact-col {
+    grid-column: span 12 !important;
+    text-align: center;
+  }
+  .footer-links-list {
+    align-items: center;
+  }
+  .footer-contact-item {
+    justify-content: center;
+  }
 }
 
 /* ==========================================================================
@@ -1131,6 +1150,19 @@ button {
   .catalog-header-section h1 {
     font-size: 1.8rem !important;
   }
+
+  /* Extremely small header & utilities spacing */
+  .header-utils {
+    gap: 8px !important;
+  }
+  .whatsapp-header-link {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  .whatsapp-header-link svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
 }
 
 
@@ -1196,13 +1228,24 @@ html[lang="ur"] .hamburger {
 
 /* Realign mobile nav drawer to slide from left in RTL */
 html[lang="ur"] .main-nav {
-  left: auto;
-  right: -100%;
+  left: -100%;
+  right: auto;
 }
 
 html[lang="ur"] .main-nav.mobile-active {
-  left: auto;
-  right: 0;
+  left: 0;
+  right: auto;
+}
+
+/* Mirror dropdown/mega menu borders/paddings on mobile for RTL */
+@media (max-width: 768px) {
+  html[lang="ur"] .dropdown-menu,
+  html[lang="ur"] .mega-menu {
+    border-left: none !important;
+    border-right: 2px solid var(--border-color) !important;
+    padding-left: 0 !important;
+    padding-right: 16px !important;
+  }
 }
 
 html[lang="ur"] .nav-item.dropdown-trigger .dropdown-menu {
@@ -1220,24 +1263,42 @@ html[lang="ur"] .nav-link svg {
   margin-right: 6px;
 }
 
+/* Floating Widgets Left Alignment for Urdu (with mobile support) */
 html[lang="ur"] .theme-toggle-btn {
-  right: auto;
-  left: 30px;
+  right: auto !important;
+  left: 30px !important;
 }
 
 html[lang="ur"] .whatsapp-widget-container {
-  right: auto;
-  left: 30px;
+  right: auto !important;
+  left: 30px !important;
 }
 
 html[lang="ur"] .whatsapp-popup-bubble {
-  right: auto;
-  left: 0;
+  right: auto !important;
+  left: 0 !important;
 }
 
 html[lang="ur"] .whatsapp-popup-close-btn {
-  right: auto;
-  left: 12px;
+  right: auto !important;
+  left: 12px !important;
+}
+
+@media (max-width: 480px) {
+  html[lang="ur"] .theme-toggle-btn {
+    left: 20px !important;
+    right: auto !important;
+    bottom: 90px !important;
+  }
+  html[lang="ur"] .whatsapp-widget-container {
+    left: 20px !important;
+    right: auto !important;
+    bottom: 20px !important;
+  }
+  html[lang="ur"] .whatsapp-popup-bubble {
+    left: 0 !important;
+    right: auto !important;
+  }
 }
 
 html[lang="ur"] .nav-item {

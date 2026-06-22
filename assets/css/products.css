@@ -289,12 +289,22 @@
 @media (max-width: 768px) {
   .filter-tags-container {
     justify-content: flex-start;
+    margin: 0;
+    padding: 4px 20px;
   }
   .products-grid {
     grid-template-columns: 1fr;
   }
   .catalog-header-section h1 {
     font-size: 2.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    max-width: 340px;
+    margin: 0 auto;
   }
 }
 
@@ -642,4 +652,19 @@
 .dosage-table th,
 .pack-size {
   color: var(--text-primary) !important;
+}
+
+/* Urdu RTL overrides for Search Bar & Table */
+html[lang="ur"] .search-icon {
+  left: auto;
+  right: 24px;
+}
+
+html[lang="ur"] .search-input {
+  padding: 16px 60px 16px 24px;
+  text-align: right;
+}
+
+html[lang="ur"] .dosage-table {
+  text-align: right;
 }

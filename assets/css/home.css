@@ -1083,6 +1083,7 @@
 @media (max-width: 768px) {
   .testimonial-card {
     width: 330px;
+    max-width: calc(100vw - 40px);
     padding: 28px;
   }
   .carousel-nav-btn {
